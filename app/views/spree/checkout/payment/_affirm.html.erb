@@ -30,7 +30,7 @@
 
       shipping: {
         name: {
-          full:  "<%= @order.ship_address.full_name if @order.ship_address.exists? %>",
+          full:  "<%= @order.ship_address.full_name if @order.ship_address %>",
         },
         address: {
           line1:        "<%= @order.ship_address.address1 if @order.ship_address %>",
