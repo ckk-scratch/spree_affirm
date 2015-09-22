@@ -33,12 +33,12 @@
           full:  "<%= @order.ship_address.full_name if @order.ship_address.exists? %>",
         },
         address: {
-          line1:        "<%= @order.ship_address.address1 if @order.ship_address.exists? %>",
-          line2:        "<%= @order.ship_address.address2 if @order.ship_address.exists? %>",
-          city:         "<%= @order.ship_address.city if @order.ship_address.exists? %>",
-          state:        "<%= @order.ship_address.state_text if @order.ship_address.exists? %>",
-          country:      "<%= @order.ship_address.country.iso if @order.ship_address.exists? %>",
-          zipcode:      "<%= @order.ship_address.zipcode if @order.ship_address.exists? %>",
+          line1:        "<%= @order.ship_address.address1 if @order.ship_address %>",
+          line2:        "<%= @order.ship_address.address2 if @order.ship_address %>",
+          city:         "<%= @order.ship_address.city if @order.ship_address %>",
+          state:        "<%= @order.ship_address.state_text if @order.ship_address %>",
+          country:      "<%= @order.ship_address.country.iso if @order.ship_address %>",
+          zipcode:      "<%= @order.ship_address.zipcode if @order.ship_address %>",
         }
       },
 
