@@ -30,15 +30,15 @@
 
       shipping: {
         name: {
-          full:  "<%= @order.ship_address.full_name if @order.ship_address %>",
+          full:  "<%= @order.bill_address.full_name %>",
         },
         address: {
-          line1:        "<%= @order.ship_address.address1 if @order.ship_address %>",
-          line2:        "<%= @order.ship_address.address2 if @order.ship_address %>",
-          city:         "<%= @order.ship_address.city if @order.ship_address %>",
-          state:        "<%= @order.ship_address.state_text if @order.ship_address %>",
-          country:      "<%= @order.ship_address.country.iso if @order.ship_address %>",
-          zipcode:      "<%= @order.ship_address.zipcode if @order.ship_address %>",
+          line1:        "<%= @order.bill_address.address1 %>",
+          line2:        "<%= @order.bill_address.address2 %>",
+          city:         "<%= @order.bill_address.city %>",
+          state:        "<%= @order.bill_address.state_text %>",
+          country:      "<%= @order.bill_address.country.iso %>",
+          zipcode:      "<%= @order.bill_address.zipcode %>",
         }
       },
 

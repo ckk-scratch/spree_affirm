@@ -19,7 +19,8 @@ module Spree
       return if self.id
 
       check_valid_products
-      check_matching_shipping_address
+      # we are not needing this now as our product is a service
+      # check_matching_shipping_address
       check_matching_billing_address
       check_matching_billing_email
       check_matching_product_key
