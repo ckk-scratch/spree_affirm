@@ -3,9 +3,14 @@
 </div>
 
 <script>
-(function(){
-  /* only include this setup once */
-  if (!window.AffirmPaymentMethods) {
+  $(window).load(function(){
+    console.log('affirm-ative')
+    affirmSetup();
+  })
+
+  function affirmSetup(){
+    /* only include this setup once */
+    
 
     /*****************************************************\
         Include the affirm js snippet
@@ -106,7 +111,10 @@
             item_image_url: "<%= URI.join(root_url, item.variant.images.first.attachment.url(:large)) %>",
           <% elsif item.variant.product.images.any? %>
             item_image_url: "<%= URI.join(root_url, item.variant.product.images.first.attachment.url(:large)) %>",
+          <% else %>
+            item_image_url: "http://www.placecage.com/200/300",
           <% end %>
+
 
           qty:           <%= item.quantity %>,
           sku:           "<%= item.variant.sku %>",
@@ -143,8 +151,6 @@
           $(this).val(button_text);
         });
 
-
-
         /*****************************************************\
             handle continue button clicks with .open()
         \*****************************************************/
@@ -173,18 +179,17 @@
     });
 
     window.AffirmPaymentMethods = {};
+
+
+    /*****************************************************\
+        set the product/button specific data to be
+        used when the continue button is directly
+        clicked
+    \*****************************************************/
+    window.AffirmPaymentMethods["<%= payment_method.id %>"] = {
+      public_api_key:           "<%= payment_method.preferred_api_key %>",
+      financial_product_key:    "<%= payment_method.preferred_product_key %>"
+    };
   }
 
-
-  /*****************************************************\
-      set the product/button specific data to be
-      used when the continue button is directly
-      clicked
-  \*****************************************************/
-  window.AffirmPaymentMethods["<%= payment_method.id %>"] = {
-    public_api_key:           "<%= payment_method.preferred_api_key %>",
-    financial_product_key:    "<%= payment_method.preferred_product_key %>"
-  };
-
-}());
 </script>
