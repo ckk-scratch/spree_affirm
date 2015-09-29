@@ -29,7 +29,7 @@ module Spree
     def check_order_total_match
       # ensure the number of line items matches
       if order.total.to_i * 100 != details['total']
-        errors.add :line_items, "Order Total Mismatch"
+        false
       end
       # if details["items"].size != order.line_items.size
       #   errors.add :line_items, "Order size mismatch"
