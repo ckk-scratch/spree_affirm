@@ -18,7 +18,7 @@ module Spree
     def validate_checkout_matches_order
       return if self.id
 
-      check_valid_products
+      check_order_total_match
       # we are not needing this now as our product is a service
       # check_matching_shipping_address
       check_matching_billing_address
@@ -26,28 +26,33 @@ module Spree
       check_matching_product_key
     end
 
-    def check_valid_products
+    def check_order_total_match
       # ensure the number of line items matches
-      if details["items"].size != order.line_items.size
-        errors.add :line_items, "Order size mismatch"
+      if order.total.to_i * 100 != details['total']
+        errors.add :line_items, "Order Total Mismatch"
       end
+      # if details["items"].size != order.line_items.size
+      #   errors.add :line_items, "Order size mismatch"
+      # end
 
-      # iterate through the line items of the checkout
-      order.line_items.each do |line_item|
+      # # iterate through the line items of the checkout
+      # order.line_items.each do |line_item|
 
-        # check that the line item sku exists in the affirm checkout
-        if !(_item = details["items"][line_item.variant.sku])
-          errors.add :line_items, "Line Item not in checkout details"
+      #   byebug
 
-        # check quantity & price
-        elsif _item["qty"].to_i   != line_item.quantity.to_i
-          errors.add :line_items, "Quantity mismatch"
+      #   # check that the line item sku exists in the affirm checkout
+      #   if !(_item = details["items"][line_item.variant.sku])
+      #     errors.add :line_items, "Line Item not in checkout details"
 
-        elsif _item["unit_price"].to_i != (line_item.price*100).to_i
-          errors.add :line_items, "Price mismatch"
+      #   # check quantity & price
+      #   elsif _item["qty"].to_i   != line_item.quantity.to_i
+      #     errors.add :line_items, "Quantity mismatch"
 
-        end
-      end
+      #   elsif _item["unit_price"].to_i != (line_item.price*100).to_i
+      #     errors.add :line_items, "Price mismatch"
+
+      #   end
+      # end
 
       # all products match
       true
