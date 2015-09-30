@@ -20,7 +20,7 @@ module Spree
 
       check_order_total_match
       # we are not needing this now as our product is a service
-      # check_matching_shipping_address
+      check_matching_shipping_address
       check_matching_billing_address
       check_matching_billing_email
       check_matching_product_key
@@ -71,7 +71,7 @@ module Spree
       details['shipping']['address'] = normalize_affirm_address details['shipping']['address']
 
       # validate address
-      check_address_match details["shipping"], order.ship_address, :shipping_address
+      check_address_match details["shipping"], order.bill_address, :billing_address
     end
 
     def check_matching_billing_email
